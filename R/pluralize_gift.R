@@ -8,13 +8,11 @@
 #' @import dplyr
 #' @import glue
 #' @import purrr
-#'
+#' @import textclean
 #' @export
-pluralize_gift <- function(gift){
+pluralize_gift<- function(x) {
 
-gift <- gift %>%
-  str_replace()
-
-return(gift)
-
+  plural<-textclean::make_plural(x)
+  return(plural)
 }
+
