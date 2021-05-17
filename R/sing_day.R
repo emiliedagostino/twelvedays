@@ -11,13 +11,17 @@
 #' @import dplyr
 #' @import glue
 #' @import purrr
+#' @import english
 #'
 #' @export
-sing_day <- function(dataset, line, phrase_col){
-
-  phrases <- dataset %>% pull({{phrase_col}})
-
-  #????
-
-
+sing_day <- function(dataset, num, phrase_col) {
+  numsq<-as.character(english::ordinal(num))
+  phrases<- dataset %>%
+    dplyr::pull({{phrase_col}})
+  phrases[1]<-stringr::str_c("and ", phrases[1], ".")
+  phrases1<-stringr::str_c(phrases[num:1], collapse = ", \n")
+  glued<-glue::glue("On the {numsq} day of Christmas, my true love gave to me:
+                  {phrases1}")
+  gluecharacter  <-as.character(glued)
+  return(gluecharacter)
 }
